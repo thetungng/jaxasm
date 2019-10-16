@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function confirmDel() {
+            var del=confirm("Press OK to delete, CANCEL to exit!");
+            if (del==true){
+                alert ("Delete success!!!");
+            }else{
+                alert("You want exit?");
+            }
+            return del;
+        }
+    </script>
+</head>
+<body>
+<table border="1">
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>city name</th>
+        <th>district name</th>
+        <th>image</th>
+        <th colspan="2">option</th>
+    </tr>
+    <tr th:each="place :${list}">
+        <td th:text="${place.id}"></td>
+        <td th:text="${place.name}"></td>
+        <td th:text="${place.city.name}"></td>
+        <td th:text="${place.district.name}"></td>
+        <td></td>
+        <td><a th:href="@{/places/edit/{id}(id=${place.id})}">EDIT</a></td>
+        <td><a th:href="@{/places/delete/{id}(id=${place.id})}" onclick="return confirmDel();">DELETE</a></td>
+    </tr>
+</table>
+</body>
+</html>
